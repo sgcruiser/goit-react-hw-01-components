@@ -3,6 +3,8 @@
   align-items: center;
   flex-direction: column;
   padding: 30px;
+
+  background-color: white;
 }
 
 .avatar {

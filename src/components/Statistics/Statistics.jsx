@@ -1,49 +1,44 @@
 import React from 'react';
-
-import StatisticsList from './StatisticsList/StatisticsList';
-
-import statisticalData from '../../data/statistical-data.json';
+import PropTypes from 'prop-types';
 
 import styles from './Statistics.module.css';
 
-<Statistics title="Upload stats" stats={statisticalData} />;
-<Statistics stats={statisticalData} />;
-
-const Statistics = () => {
+const Statistics = ({ title, stats }) => {
   return (
-    <section class="statistics">
-      <h2 class="title">Upload stats</h2>
-
-      <ul class="stat-list">
-        <li class="item">
-          <span class="label">.docx</span>
-          <span class="percentage">4%</span>
-        </li>
-        <li class="item">
-          <span class="label">.mp3</span>
-          <span class="percentage">14%</span>
-        </li>
-        <li class="item">
-          <span class="label">.pdf</span>
-          <span class="percentage">41%</span>
-        </li>
-        <li class="item">
-          <span class="label">.mp4</span>
-          <span class="percentage">12%</span>
-        </li>
+    <section className={styles.statistics}>
+      {title && <h2 className={styles.title}>{title}</h2>}
+      <ul className={styles.stat__list}>
+        {stats.map(stat => (
+          <li
+            key={stat.id}
+            className={styles.stat__item}
+            style={{ backgroundColor: setBackgroundColorRandom() }}
+          >
+            <span className={styles.stat__label}>{stat.label}</span>
+            <span className={styles.stat__percentage}>{stat.percentage}%</span>
+          </li>
+        ))}
       </ul>
-
-      {/* <div className={styles.profile}>
-        <Description
-          name={user.name}
-          tag={user.tag}
-          location={user.location}
-          avatar={user.avatar}
-        />
-        <StatisticsList stats={user.stats} />
-      </div> */}
     </section>
   );
+};
+
+const setBackgroundColorRandom = () =>
+  '#' + Math.floor(Math.random() * 16777215).toString(16);
+
+Statistics.defaultProps = {
+  title: '',
+};
+
+Statistics.propTypes = {
+  title: PropTypes.string.isRequired,
+  stats: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.string,
+      label: PropTypes.string,
+      percentage: PropTypes.number,
+    }).isRequired,
+  ),
 };
 
 export default Statistics;
