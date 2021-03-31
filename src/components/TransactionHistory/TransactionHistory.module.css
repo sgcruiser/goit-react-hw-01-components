@@ -19,9 +19,6 @@
   text-transform: uppercase;
 }
 
-.transaction_history tr {
-}
-
 .transaction_history tr:nth-child(2n) {
   background-color: rgb(226, 226, 226);
 }
