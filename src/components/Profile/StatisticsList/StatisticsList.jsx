@@ -12,7 +12,7 @@ const StatisticsList = ({ stats }) => {
   return (
     <ul className={styles.list}>
       {arrayStats.map((stat, index) => (
-        <li key={index} className={styles.stats}>
+        <li key={index.toString()} className={styles.stats}>
           <StatisticsData title={stat} value={arrayValue[index]} />
         </li>
       ))}
